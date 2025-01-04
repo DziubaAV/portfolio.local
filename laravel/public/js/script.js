@@ -1,130 +1,128 @@
-"use strict";
+'use strict';
 
-/**
- * Переключает класс "active" у указанного элемента.
- * @param {HTMLElement} elem - Элемент, для которого нужно переключить класс.
- */
-const elementToggleFunc = function (elem) {
-    elem.classList.toggle("active");
+// Общая функция для переключения активного состояния элемента
+const elementToggleFunc = (elem) => {
+  elem.classList.toggle("active");
 };
 
-// Переменные для боковой панели
+// Sidebar (боковое меню) - переменные и обработка
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// Переключение видимости боковой панели для мобильных устройств
-sidebarBtn.addEventListener("click", function () {
-    elementToggleFunc(sidebar);
-});
+// Открытие и закрытие бокового меню
+sidebarBtn.addEventListener("click", () => elementToggleFunc(sidebar));
 
-// Переменные для отзывов
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
+// Testimonials - переменные для модального окна
+const testimonialsItems = document.querySelectorAll("[data-testimonials-item]");
 const modalContainer = document.querySelector("[data-modal-container]");
 const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
 const overlay = document.querySelector("[data-overlay]");
 
-// Переменные содержимого модального окна
+// Переменные для модального окна
 const modalImg = document.querySelector("[data-modal-img]");
 const modalTitle = document.querySelector("[data-modal-title]");
 const modalText = document.querySelector("[data-modal-text]");
 
-/**
- * Переключает класс "active" для модального окна и затемнения фона.
- */
-const testimonialsModalFunc = function () {
-    modalContainer.classList.toggle("active");
-    overlay.classList.toggle("active");
+// Функция для открытия/закрытия модального окна
+const toggleModal = () => {
+  modalContainer.classList.toggle("active");
+  overlay.classList.toggle("active");
 };
 
-// Добавление события клика на каждый элемент отзывов
-for (let i = 0; i < testimonialsItem.length; i++) {
-    testimonialsItem[i].addEventListener("click", function () {
-        // Установка данных в модальное окно
-        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-        modalTitle.innerHTML = this.querySelector(
-            "[data-testimonials-title]"
-        ).innerHTML;
-        modalText.innerHTML = this.querySelector(
-            "[data-testimonials-text]"
-        ).innerHTML;
+// Обработчик для кликов по элементам отзывов
+testimonialsItems.forEach(item => {
+  item.addEventListener("click", () => {
+    modalImg.src = item.querySelector("[data-testimonials-avatar]").src;
+    modalImg.alt = item.querySelector("[data-testimonials-avatar]").alt;
+    modalTitle.innerHTML = item.querySelector("[data-testimonials-title]").innerHTML;
+    modalText.innerHTML = item.querySelector("[data-testimonials-text]").innerHTML;
 
-        testimonialsModalFunc();
-    });
-}
+    toggleModal();
+  });
+});
 
-// Добавление события клика для кнопки закрытия модального окна и затемнения фона
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
+// Закрытие модального окна при клике на кнопку или на оверлей
+modalCloseBtn.addEventListener("click", toggleModal);
+overlay.addEventListener("click", toggleModal);
 
-// Переменные для пользовательского выпадающего списка
+// Custom Select - переменные для выпадающего списка
 const select = document.querySelector("[data-select]");
 const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
+const filterBtns = document.querySelectorAll("[data-filter-btn]");
 
-// Переключение видимости выпадающего списка
-select.addEventListener("click", function () {
-    elementToggleFunc(this);
+// Открытие/закрытие выпадающего списка
+select.addEventListener("click", () => elementToggleFunc(select));
+
+// Обработчик выбора элемента в выпадающем списке
+selectItems.forEach(item => {
+  item.addEventListener("click", () => {
+    const selectedValue = item.innerText.toLowerCase();
+    selectValue.innerText = item.innerText;
+    elementToggleFunc(select);
+    filterFunc(selectedValue);
+  });
 });
 
-// Добавление событий клика для каждого элемента выпадающего списка
-for (let i = 0; i < selectItems.length; i++) {
-    selectItems[i].addEventListener("click", function () {
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        elementToggleFunc(select);
-        filterFunc(selectedValue);
-    });
-}
-
-// Переменные для фильтрации элементов
+// Фильтрация элементов по категории
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-/**
- * Фильтрует элементы в зависимости от выбранного значения.
- * @param {string} selectedValue - Выбранное значение фильтра.
- */
-const filterFunc = function (selectedValue) {
-    for (let i = 0; i < filterItems.length; i++) {
-        if (selectedValue === "all") {
-            filterItems[i].classList.add("active");
-        } else if (selectedValue === filterItems[i].dataset.category) {
-            filterItems[i].classList.add("active");
-        } else {
-            filterItems[i].classList.remove("active");
-        }
+const filterFunc = (selectedValue) => {
+  filterItems.forEach(item => {
+    if (selectedValue === "all" || selectedValue === item.dataset.category) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
     }
+  });
 };
 
-// Добавление событий клика для кнопок фильтрации на больших экранах
-let lastClickedBtn = filterBtn[0];
+// Обработчик кликов по фильтрующим кнопкам для больших экранов
+let lastClickedBtn = filterBtns[0];
+filterBtns.forEach(button => {
+  button.addEventListener("click", () => {
+    const selectedValue = button.innerText.toLowerCase();
+    selectValue.innerText = button.innerText;
+    filterFunc(selectedValue);
 
-for (let i = 0; i < filterBtn.length; i++) {
-    filterBtn[i].addEventListener("click", function () {
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        filterFunc(selectedValue);
+    lastClickedBtn.classList.remove("active");
+    button.classList.add("active");
+    lastClickedBtn = button;
+  });
+});
 
-        lastClickedBtn.classList.remove("active");
-        this.classList.add("active");
-        lastClickedBtn = this;
-    });
-}
-
-// Переменные для формы обратной связи
+// Contact Form - переменные и обработка формы
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
 
-// Добавление событий ввода для каждого поля формы
-for (let i = 0; i < formInputs.length; i++) {
-    formInputs[i].addEventListener("input", function () {
-        // Проверка валидации формы
-        if (form.checkValidity()) {
-            formBtn.removeAttribute("disabled");
-        } else {
-            formBtn.setAttribute("disabled", "");
-        }
+// Включение/выключение кнопки отправки формы в зависимости от ее валидности
+formInputs.forEach(input => {
+  input.addEventListener("input", () => {
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    } else {
+      formBtn.setAttribute("disabled", "");
+    }
+  });
+});
+
+// Page Navigation - переменные и обработка переходов по страницам
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
+
+// Переход по страницам при клике на навигационные ссылки
+navigationLinks.forEach((link, index) => {
+  link.addEventListener("click", () => {
+    pages.forEach((page, i) => {
+      if (i === index) {
+        page.classList.add("active");
+        navigationLinks[i].classList.add("active");
+        window.scrollTo(0, 0);
+      } else {
+        page.classList.remove("active");
+        navigationLinks[i].classList.remove("active");
+      }
     });
-}
+  });
+});

@@ -1,5 +1,4 @@
 :root {
-
     /* gradient */
 
     --bg-gradient-onyx: linear-gradient(
@@ -225,7 +224,6 @@ article.active {
 .h4,
 .h5 {
     color: var(--white-2);
-    text-transform: capitalize;
 }
 
 .h2 {
@@ -258,6 +256,7 @@ article.active {
     width: 30px;
     height: 3px;
     background: var(--text-gradient-yellow);
+
     border-radius: 3px;
 }
 
@@ -437,6 +436,11 @@ main {
 
 .contact-info address {
     font-style: normal;
+}
+
+.alert-success {
+    color: var(--light-gray-70);
+    font-size: var(--fs-8);
 }
 
 .social-list {

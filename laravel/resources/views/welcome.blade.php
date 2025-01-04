@@ -30,14 +30,14 @@
 
 <!-- Блок с аватаром пользователя -->
 <figure class="avatar-box">
-<img src="{{ asset('images/my-avatar.png') }}" alt="Dziuba Artsiomi" width="80">
+<img src="{{ asset('images/my-avatar.png') }}" alt="Дзюба Артёмий" width="80">
 </figure>
 
     
 <div class="info-content">
 
 <!-- Имя пользователя -->
-<h1 class="name" title="Dziuba Artsiomi">Dziuba Artsiomi</h1>
+<h1 class="name" title="Дзюба Артёмий">Дзюба Артёмий</h1>
 <!-- Должность пользователя -->
 <p class="title">System administrator</p>
 
@@ -45,7 +45,7 @@
 
 <!-- Кнопка для отображения дополнительных контактов -->
 <button class="info_more-btn" data-sidebar-btn>
-<span>Show contact</span>
+<span>Показаь контакты</span>
 <ion-icon name="chevron-down"></ion-icon>
 </button>
 
@@ -76,8 +76,8 @@
 <ion-icon name="location-outline"></ion-icon>
 </div>
 <div class="contact-info">
-<p class="contact-title">Location</p>
-<address>Minsk, BY</address>
+<p class="contact-title">Расположение</p>
+<address>Минск, Беларусь</address>
 </div>
 </li>
 
@@ -107,6 +107,7 @@
 <div class="main-content">
 
 <!-- NAVBAR -->
+
 <nav class="navbar">
 <ul class="navbar-list">
 
@@ -125,7 +126,10 @@
 </li>
 
   <li class="navbar-item">
-  <button class="navbar-link">Portfolio</button>
+  <a href="{{ route('video') }}" 
+       class="navbar-link {{ request()->routeIs('video') ? 'active' : '' }}">
+       Видео
+    </a>
   </li>
 
   <li class="navbar-item">
@@ -133,23 +137,30 @@
   </li>
 
   <li class="navbar-item">
-  <button class="navbar-link">Contact</button>
+  <a href="{{ route('contact') }}" 
+       class="navbar-link {{ request()->routeIs('contact') ? 'active' : '' }}">
+       Контакты
+    </a>
   </li>
+
+
 
 </ul>
 </nav>
 
-
-@yield('content')
-
+<!-- Основное содержимое -->
+    @yield('content')
 
 </div>
 </main>
 
-  <script src="{{ asset('/js/script.js') }}"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<!-- Script -->
+
+
+<script src="{{ asset('js/script.js') }}" defer></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
-
 </html>
