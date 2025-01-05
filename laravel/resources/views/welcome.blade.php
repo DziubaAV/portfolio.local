@@ -30,7 +30,7 @@
 
 <!-- Блок с аватаром пользователя -->
 <figure class="avatar-box">
-<img src="{{ asset('images/my-avatar.png') }}" alt="Дзюба Артёмий" width="80">
+<img src="{{ asset('images\my-avatar.png') }}" alt="Дзюба Артёмий" width="80">
 </figure>
 
     
@@ -133,9 +133,11 @@
   </li>
 
   <li class="navbar-item">
-  <button class="navbar-link">Blog</button>
+  <a href="{{ route('blog') }}" 
+       class="navbar-link {{ request()->routeIs('blog') ? 'active' : '' }}">
+       Блог
+    </a>
   </li>
-
   <li class="navbar-item">
   <a href="{{ route('contact') }}" 
        class="navbar-link {{ request()->routeIs('contact') ? 'active' : '' }}">

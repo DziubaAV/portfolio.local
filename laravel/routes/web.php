@@ -5,6 +5,8 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\BlogController;
+
 
 
 Route::get('/', function () {
@@ -20,10 +22,11 @@ Route::get('/resume', function () {
 Route::get('/contact', function () {
     return view('contact');})->name('contact');
 
-    Route::get('/video', [VideoController::class, 'index'])->name('video');
+Route::get('/blog', function () {
+    return view('blog');})->name('blog');
 
-
-Route::get('/videos', [VideoController::class, 'index']);
-    
+Route::get('/video', [VideoController::class, 'index'])->name('video');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+  
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::post('/contact', [ContactController::class, 'store']);
