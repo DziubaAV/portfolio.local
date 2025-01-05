@@ -5,7 +5,7 @@
 
 <article class="portfolio active">
   <header>
-    <h2 class="h2 article-title">Portfolio</h2>
+    <h2 class="h2 article-title">Видео</h2>
   </header>
 
   <section class="projects">
@@ -15,20 +15,20 @@
         <button class="active" data-filter-btn>All</button>
       </li>
       <li class="filter-item">
-        <button data-filter-btn>Web design</button>
+        <button data-filter-btn>Адреналин</button>
       </li>
       <li class="filter-item">
-        <button data-filter-btn>Applications</button>
+        <button data-filter-btn>Путешествия</button>
       </li>
       <li class="filter-item">
-        <button data-filter-btn>Web development</button>
+        <button data-filter-btn>Разное</button>
       </li>
     </ul>
 
     <!-- Выпадающий список фильтра -->
     <div class="filter-select-box">
       <button class="filter-select" data-select>
-        <div class="select-value" data-selecct-value>Select category</div>
+        <div class="select-value" data-selecct-value>Выбрать категорию</div>
         <div class="select-icon">
           <ion-icon name="chevron-down"></ion-icon>
         </div>
@@ -38,43 +38,36 @@
           <button data-select-item>All</button>
         </li>
         <li class="select-item">
-          <button data-select-item>Web design</button>
+          <button data-select-item>Адреналин</button>
         </li>
         <li class="select-item">
-          <button data-select-item>Applications</button>
+          <button data-select-item>Путешествия</button>
         </li>
         <li class="select-item">
-          <button data-select-item>Web development</button>
+          <button data-select-item>Разное</button>
         </li>
       </ul>
     </div>
 
     <!-- Проекты -->
     <ul class="project-list">
-      <li class="project-item active" data-filter-item data-category="web development">
-        <a href="#">
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-            <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
-          </figure>
-          <h3 class="project-title">Finance</h3>
-          <p class="project-category">Web development</p>
+        
+    @foreach($videos as $video)
+    <li class="project-item active" data-filter-item data-category="{{ $video->category }}">
+        <a href="{{ $video->video_url }}" target="_blank">
+            <figure class="project-img">
+                <div class="project-item-icon-box">
+                    <ion-icon name="eye-outline"></ion-icon>
+                </div>
+                <iframe width="100%" height="auto" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </figure>
+            <h3 class="project-title">{{ $video->title }}</h3>
+            <p class="project-category">{{ $video->category }}</p>
         </a>
-      </li>
-      <li class="project-item active" data-filter-item data-category="web design">
-        <a href="#">
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-            <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
-          </figure>
-          <h3 class="project-title">Orizon</h3>
-          <p class="project-category">Web design</p>
-        </a>
-      </li>
+    </li>
+    @endforeach
+
+
       <!-- Другие проекты -->
     </ul>
   </section>
