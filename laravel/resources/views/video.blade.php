@@ -89,6 +89,8 @@ const elementToggleFunc = (elem) => {
   elem.classList.toggle("active");
 };
 
+// === ФИЛЬТРАЦИЯ ===
+
 // Переменные для фильтров
 const filterBtns = document.querySelectorAll("[data-filter-btn]");
 const selectBtn = document.querySelector("[data-select]");
@@ -98,7 +100,7 @@ const filterItems = document.querySelectorAll("[data-filter-item]");
 
 // Функция для фильтрации элементов
 const filterFunc = (selectedCategory) => {
-  filterItems.forEach(item => {
+  filterItems.forEach((item) => {
     if (selectedCategory === "all" || selectedCategory === item.dataset.category) {
       item.classList.add("active");
     } else {
@@ -108,14 +110,14 @@ const filterFunc = (selectedCategory) => {
 };
 
 // Обработчик кликов по кнопкам фильтров
-filterBtns.forEach(button => {
+filterBtns.forEach((button) => {
   button.addEventListener("click", function () {
     const selectedCategory = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     filterFunc(selectedCategory);
 
     // Переключение активного класса на кнопках
-    filterBtns.forEach(btn => btn.classList.remove("active"));
+    filterBtns.forEach((btn) => btn.classList.remove("active"));
     this.classList.add("active");
   });
 });
@@ -127,7 +129,7 @@ selectBtn.addEventListener("click", (e) => {
 });
 
 // Обработчик выбора категории из выпадающего списка
-selectItems.forEach(item => {
+selectItems.forEach((item) => {
   item.addEventListener("click", function () {
     const selectedCategory = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
@@ -135,7 +137,7 @@ selectItems.forEach(item => {
     elementToggleFunc(selectBtn);
 
     // Убираем активный класс с других элементов
-    selectItems.forEach(i => i.classList.remove("active"));
+    selectItems.forEach((i) => i.classList.remove("active"));
     this.classList.add("active");
   });
 });
@@ -148,28 +150,30 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Переменные для кнопки и панели контактов
-const infoMoreBtn = document.querySelector("[data-sidebar-btn]");
-const sidebarInfoMore = document.querySelector(".sidebar-info_more");
+// === БОКОВАЯ ПАНЕЛЬ ===
 
-// Функция для переключения отображения контактов
-const toggleSidebarInfo = () => {
-  sidebarInfoMore.classList.toggle("active");
-  const isActive = sidebarInfoMore.classList.contains("active");
+// Переменные для кнопки и боковой панели
+const infoMoreBtn = document.querySelector("[data-sidebar-btn]");
+const sidebar = document.querySelector("[data-sidebar]");
+
+// Функция для переключения боковой панели
+const toggleSidebar = () => {
+  elementToggleFunc(sidebar); // Переключаем класс "active" у панели
+  const isActive = sidebar.classList.contains("active");
   infoMoreBtn.querySelector("span").textContent = isActive ? "Скрыть контакты" : "Показать контакты";
 };
 
-// Обработчик клика по кнопке для показа/скрытия контактов
+// Обработчик клика по кнопке
 infoMoreBtn.addEventListener("click", (e) => {
   e.stopPropagation(); // предотвращаем всплытие события
-  toggleSidebarInfo();
+  toggleSidebar();
 });
 
-// Закрытие панели контактов, если кликнули вне
+// Закрытие боковой панели, если кликнули вне
 document.addEventListener("click", (e) => {
-  const isClickInside = infoMoreBtn.contains(e.target) || sidebarInfoMore.contains(e.target);
+  const isClickInside = infoMoreBtn.contains(e.target) || sidebar.contains(e.target);
   if (!isClickInside) {
-    sidebarInfoMore.classList.remove("active");
+    sidebar.classList.remove("active");
     infoMoreBtn.querySelector("span").textContent = "Показать контакты";
   }
 });
