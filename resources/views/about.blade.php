@@ -17,7 +17,6 @@
   </p>
 
 </section>
-
 <!--Testimonials-->
 
 <section class="testimonials">
