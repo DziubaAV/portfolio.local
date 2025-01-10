@@ -114,7 +114,7 @@
 <li class="navbar-item">
     <a href="{{ route('about') }}" 
        class="navbar-link {{ request()->routeIs('about') ? 'active' : '' }}">
-       Обо мне
+       Дом
     </a>
 </li>
 
