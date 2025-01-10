@@ -1,5 +1,5 @@
 @extends("welcome")
-@section('title-block', 'Обо мне')
+@section('title-block', 'Домашняя страница')
 
 @section('content')
 
