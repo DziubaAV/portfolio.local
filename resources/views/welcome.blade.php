@@ -39,13 +39,13 @@
 <!-- Имя пользователя -->
 <h1 class="name" title="Дзюба Артёмий">Дзюба Артёмий</h1>
 <!-- Должность пользователя -->
-<p class="title">System administrator</p>
+<p class="title">Системный администратор</p>
 
 </div>
 
 <!-- Кнопка для отображения дополнительных контактов -->
 <button class="info_more-btn" data-sidebar-btn>
-<span>Показаь контакты</span>
+<span>Показать контакты</span>
 <ion-icon name="chevron-down"></ion-icon>
 </button>
 
@@ -114,7 +114,7 @@
 <li class="navbar-item">
     <a href="{{ route('about') }}" 
        class="navbar-link {{ request()->routeIs('about') ? 'active' : '' }}">
-       Дом
+       Главная
     </a>
 </li>
 

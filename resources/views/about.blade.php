@@ -1,12 +1,12 @@
 @extends("welcome")
-@section('title-block', 'DzArt')
+@section('title-block', 'Главная')
 
 @section('content')
 
 <article class="about active">
 
 <header>
-<h2 class="h2 article-title">Домашняя страница</h2>
+<h2 class="h2 article-title">Добро пожаловать</h2>
 </header>
 
 <section class="about-text">
