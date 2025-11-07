@@ -1,5 +1,5 @@
 @extends("welcome")
-@section('title-block', 'You Tube')
+@section('title-block', 'Блог')
 
 @section('content')
 <article class="blog active">
