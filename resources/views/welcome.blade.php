@@ -28,6 +28,15 @@
 <!-- Информация о пользователе в боковой панели -->
 <div class="sidebar-info">
 
+ <!-- Переключатель языка -->
+    <div class="lang-wrapper">
+    <a href="{{ route('lang.switch', 'ru') }}" 
+       class="lang-btn {{ app()->getLocale() == 'ru' ? 'active' : '' }}">RU</a>
+    <span class="lang-separator"></span>
+    <a href="{{ route('lang.switch', 'en') }}" 
+       class="lang-btn {{ app()->getLocale() == 'en' ? 'active' : '' }}">EN</a>
+</div>
+
 <!-- Блок с аватаром пользователя -->
 <figure class="avatar-box">
 <img src="{{ asset('images\my-avatar.png') }}" alt="Дзюба Артёмий" width="80">
@@ -37,9 +46,9 @@
 <div class="info-content">
 
 <!-- Имя пользователя -->
-<h1 class="name" title="Дзюба Артёмий">Дзюба Артёмий</h1>
+<h1 class="name" title="Дзюба Артёмий">{{ __('messages.name') }}</h1>
 <!-- Должность пользователя -->
-<p class="title">Системный администратор</p>
+<p class="title">{{ __('messages.title') }}</p>
 
 </div>
 

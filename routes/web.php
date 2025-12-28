@@ -6,7 +6,8 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\BlogController;
-
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
 
 
 Route::get('/', function () {
@@ -30,3 +31,11 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog');
   
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::post('/contact', [ContactController::class, 'store']);
+
+// Переключатель языков (словарь)
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ru'])) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('lang.switch');

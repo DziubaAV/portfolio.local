@@ -126,3 +126,18 @@ navigationLinks.forEach((link, index) => {
     });
   });
 });
+
+
+// Переключатель языка
+const langButtons = document.querySelectorAll('.lang-btn');
+
+langButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    langButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const selectedLang = btn.getAttribute('data-lang');
+    console.log(`Язык переключен на: ${selectedLang}`);
+    // Здесь добавьте логику смены текста на странице
+  });
+});

@@ -2011,3 +2011,41 @@ textarea.form-input::-webkit-resizer {
         max-width: 700px;
     }
 }
+
+/** Переключатель языка
+.sidebar-info { position: relative; } /* Чтобы позиционировать кнопку */
+
+.lang-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  background: var(--onyx);
+  border-radius: 0 15px 0 15px; /* Красивый скос углов */
+  border: 1px solid var(--jet);
+  font-size: 11px;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.lang-btn {
+  color: var(--light-gray-70);
+  transition: 0.3s ease;
+  text-transform: uppercase;
+}
+
+.lang-btn:hover { color: var(--orange-yellow-crayola); }
+
+.lang-btn.active {
+  color: var(--orange-yellow-crayola);
+  pointer-events: none;
+}
+
+.lang-separator {
+  width: 1px;
+  height: 10px;
+  background: var(--jet);
+}
